@@ -30,6 +30,8 @@ def get_room_availability_data() -> dict:
         'TE': 'Trailers',
     }
 
+    # todo set dates in here
+
     post_data = '{"filterData":{"filters":[{"filterName":"StartDate","value":"2021-03-6 12:00:00","displayValue":null,"filterType":3},{"filterName":"EndDate","value":"2021-03-7 12:00:00","filterType":3,"displayValue":""},{"filterName":"Locations","value":"-1","displayValue":"(all)","filterType":8},{"filterName":"TimeZone","value":"68","displayValue":"","filterType":2},{"filterName":"RoomTypes","value":"120","displayValue":"Study","filterType":7}]}}'
 
     response = requests.post('https://ems.colorado.edu/ServerApi.aspx/GetBrowseLocationsRooms',
@@ -39,7 +41,8 @@ def get_room_availability_data() -> dict:
 
     data = json.loads(response.content)
 
-    return data
+    d = json.loads(data['d'])
+    return d['Buildings']
 
 
 def get_current_building_density() -> dict:
@@ -51,4 +54,4 @@ def get_available_rooms():
     """
     Combines density data and available room data.
     """
-    get_room_availability_data()
+    return get_room_availability_data()
