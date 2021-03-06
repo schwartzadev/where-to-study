@@ -52,11 +52,14 @@ def get_room_availability_data() -> dict:
     clean_buildings = []
     for building in raw_buildings_data:
         rooms = [room['Description'] for room in building['Rooms']]
-        clean_buildings.append({
-            "code": building['Code'].replace('B_', ''),
-            "label": building['DisplayText'],
-            "rooms": rooms
-        })
+        
+        # Don't add the building if it has no rooms.
+        if len(rooms) > 0:
+            clean_buildings.append({
+                "code": building['Code'].replace('B_', ''),
+                "label": building['DisplayText'],
+                "rooms": rooms
+            })
 
     return clean_buildings
 
