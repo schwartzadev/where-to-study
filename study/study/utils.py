@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
-from datetime import date
+from datetime import date, datetime
 import requests
 import json
+import pytz
 
 """
 Utilities to get available rooms
@@ -129,13 +130,23 @@ def get_available_rooms():
     
     rooms = []
 
+    
+    tz = pytz.timezone('US/Mountain')
+
+    current_hour = datetime.now(tz).strftime('%-H')
+
     for building in available_buildings:
+        current_density = None
+        if building['density'] is not None:
+            current_density = [hour for hour in building['density'] if hour['hourOfDay'] is int(current_hour)]
+            if current_density is not None:
+                current_density = current_density[0]['density']
         for room in building['rooms']:
             rooms.append({
                 "label": room['name'],
                 "id": room['id'],
                 "building_code": building["code"],
-                "density": building['density'] # todo make this just the current density %
+                "density": current_density
             })
 
     filtered_rooms = filter_rooms_by_bookings(rooms)
