@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 from datetime import date
+import requests
+import json
 
 """
 Utilities to get available rooms
@@ -13,7 +15,40 @@ def get_building_density(day_of_week: str) -> dict:
         data = json.load(f)
     return data
 
+def get_room_availability_data() -> dict:
+    # todo remove the headers that aren't required
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0',
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Origin': 'https://ems.colorado.edu',
+        'DNT': '1',
+        'Connection': 'keep-alive',
+        'Referer': 'https://ems.colorado.edu/BrowseForSpace.aspx',
+        'TE': 'Trailers',
+    }
+
+    post_data = '{"filterData":{"filters":[{"filterName":"StartDate","value":"2021-03-6 12:00:00","displayValue":null,"filterType":3},{"filterName":"EndDate","value":"2021-03-7 12:00:00","filterType":3,"displayValue":""},{"filterName":"Locations","value":"-1","displayValue":"(all)","filterType":8},{"filterName":"TimeZone","value":"68","displayValue":"","filterType":2},{"filterName":"RoomTypes","value":"120","displayValue":"Study","filterType":7}]}}'
+
+    response = requests.post('https://ems.colorado.edu/ServerApi.aspx/GetBrowseLocationsRooms',
+        headers=headers,
+        data=post_data,
+    )
+
+    data = json.loads(response.content)
+
+    return data
+
 
 def get_current_building_density() -> dict:
     today_weekday = date.today().strftime('%A')
     return get_building_density(today_weekday)
+
+
+def get_available_rooms():
+    """
+    Combines density data and available room data.
+    """
+    get_room_availability_data()
