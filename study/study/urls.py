@@ -20,5 +20,6 @@ from study import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('map', views.MapView.as_view(), name='map'),
-    path('', views.index, name='index'),
+    path('map/', views.MapView.as_view(), name='map'),
+    path('', views.IndexView.as_view(), name='index'),
 ]
