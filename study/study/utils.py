@@ -89,5 +89,15 @@ def get_available_rooms():
         except KeyError as e:
             # Building does not exist in the density data...
             building['density'] = None
+    
+    rooms = []
 
-    return available_buildings
+    for building in available_buildings:
+        for room in building['rooms']:
+            rooms.append({
+                "label": room,
+                "building_code": building["code"],
+                "density": building['density']
+            })
+
+    return rooms
