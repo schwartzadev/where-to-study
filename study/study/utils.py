@@ -25,6 +25,17 @@ def get_building_density(day_of_week: str) -> dict:
         data = json.load(f)
     return data
 
+def get_building_info() -> dict:
+    path = Path('building_data/building_info.json')
+    with open(path) as f:
+        building_info = json.load(f)
+    
+    building_dict = {}
+    for building in building_info:
+        code = building['code']
+        building_dict[code] = building
+    return building_dict
+
 
 def get_building_availability_data() -> dict:
     """Gets and parses availability data from ems.colorado.edu
@@ -124,7 +135,7 @@ def get_available_rooms():
 
     for building in current_density:
         density_dict[building["buildingCode"]] = building
-
+    
     for building in available_buildings:
         code = building['code']
         try:
@@ -135,7 +146,6 @@ def get_available_rooms():
             building['density'] = None
     
     rooms = []
-
     
     tz = pytz.timezone('US/Mountain')
 
@@ -157,4 +167,12 @@ def get_available_rooms():
             })
 
     filtered_rooms = filter_rooms_by_bookings(rooms)
+
+    # Add address data
+    building_info = get_building_info()
+
+    for room in filtered_rooms:
+        code = room['building_code']
+        room['address'] = building_info[code]['address']
+
     return filtered_rooms
