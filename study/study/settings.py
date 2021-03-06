@@ -25,8 +25,9 @@ SECRET_KEY = 'f1mw^xt$29vio$&#5qtvrmh-8gklf+_o0%!j$!p5l6v*u8p@hx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['where-to-study.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'where-to-study.herokuapp.com']
 
+X_FRAME_OPTIONS = 'ALLOW-FROM localhost where-to-study.herokuapp.com'
 
 # Application definition
 
