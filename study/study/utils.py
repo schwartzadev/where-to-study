@@ -136,11 +136,12 @@ def get_available_rooms():
     current_hour = datetime.now(tz).strftime('%-H')
 
     for building in available_buildings:
-        current_density = None
-        if building['density'] is not None:
-            current_density = [hour for hour in building['density'] if hour['hourOfDay'] is int(current_hour)]
-            if current_density is not None:
-                current_density = current_density[0]['density']
+        if building['density'] is None:
+            # Don't add to rooms
+            continue
+        current_density = [hour for hour in building['density'] if hour['hourOfDay'] is int(current_hour)]
+        if current_density is not None:
+            current_density = current_density[0]['density']
         for room in building['rooms']:
             rooms.append({
                 "label": room['name'],
