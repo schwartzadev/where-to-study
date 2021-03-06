@@ -70,4 +70,21 @@ def get_available_rooms():
     """
     Combines density data and available room data.
     """
-    return get_room_availability_data()
+    available_buildings =  get_room_availability_data()
+    current_density = get_current_building_density()
+
+    density_dict = {}
+
+    for building in current_density:
+        density_dict[building["buildingCode"]] = building
+
+    for building in available_buildings:
+        code = building['code']
+        try:
+            density_info = density_dict[code]
+            building['density'] = density_info['trendData']
+        except KeyError as e:
+            # Building does not exist in the density data...
+            building['density'] = None
+
+    return available_buildings
