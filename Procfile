@@ -1,1 +1,1 @@
-web: gunicorn study/study.wsgi
+web: cd study && gunicorn study.wsgi
