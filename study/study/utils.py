@@ -1,6 +1,6 @@
 import json
 from pathlib import Path
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import requests
 import json
 import pytz
@@ -9,6 +9,15 @@ import pytz
 Utilities to get available rooms
 """
 
+def _get_ems_post_data() -> str:
+    today = date.today()
+    today_string = today.strftime('%Y-%m-%-d')
+
+    tomorrow_string = (today + timedelta(days=1)).strftime('%Y-%m-%-d')
+
+    data = '{{"filterData":{{"filters":[{{"filterName":"StartDate","value":"{today} 12:00:00","displayValue":null,"filterType":3}},{{"filterName":"EndDate","value":"{tomorrow} 12:00:00","filterType":3,"displayValue":""}},{{"filterName":"Locations","value":"-1","displayValue":"(all)","filterType":8}},{{"filterName":"TimeZone","value":"68","displayValue":"","filterType":2}},{{"filterName":"RoomTypes","value":"120","displayValue":"Study","filterType":7}}]}}}}'.format(today=today_string, tomorrow=tomorrow_string)
+
+    return data
 
 def get_building_density(day_of_week: str) -> dict:
     path = Path('building_data/density_trends') /  Path(day_of_week.lower() + '.json')
@@ -37,9 +46,7 @@ def get_building_availability_data() -> dict:
         'TE': 'Trailers',
     }
 
-    # todo set dates in here
-
-    post_data = '{"filterData":{"filters":[{"filterName":"StartDate","value":"2021-03-6 12:00:00","displayValue":null,"filterType":3},{"filterName":"EndDate","value":"2021-03-7 12:00:00","filterType":3,"displayValue":""},{"filterName":"Locations","value":"-1","displayValue":"(all)","filterType":8},{"filterName":"TimeZone","value":"68","displayValue":"","filterType":2},{"filterName":"RoomTypes","value":"120","displayValue":"Study","filterType":7}]}}'
+    post_data = _get_ems_post_data()
 
     response = requests.post('https://ems.colorado.edu/ServerApi.aspx/GetBrowseLocationsRooms',
         headers=headers,
@@ -86,8 +93,7 @@ def filter_rooms_by_bookings(original_rooms: list) -> list:
         'TE': 'Trailers',
     }
 
-    # todo make the date values dynamic
-    data = '{"filterData":{"filters":[{"filterName":"StartDate","value":"2021-03-6 12:00:00","displayValue":null,"filterType":3},{"filterName":"EndDate","value":"2021-03-7 12:00:00","filterType":3,"displayValue":""},{"filterName":"Locations","value":"-1","displayValue":"(all)","filterType":8},{"filterName":"TimeZone","value":"68","displayValue":"","filterType":2},{"filterName":"RoomTypes","value":"120","displayValue":"Study","filterType":7}]}}'
+    data = _get_ems_post_data()
 
     response = requests.post('https://ems.colorado.edu/ServerApi.aspx/GetBrowseLocationsBookings', headers=headers, data=data)
 
