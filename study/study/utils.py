@@ -16,6 +16,11 @@ def get_building_density(day_of_week: str) -> dict:
     return data
 
 def get_room_availability_data() -> dict:
+    """Gets and parses availability data from ems.colorado.edu
+
+    Returns:
+        dict: A cleaned array of building data
+    """
     # todo remove the headers that aren't required
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:86.0) Gecko/20100101 Firefox/86.0',
@@ -42,7 +47,18 @@ def get_room_availability_data() -> dict:
     data = json.loads(response.content)
 
     d = json.loads(data['d'])
-    return d['Buildings']
+    raw_buildings_data = d['Buildings']
+
+    clean_buildings = []
+    for building in raw_buildings_data:
+        rooms = [room['Description'] for room in building['Rooms']]
+        clean_buildings.append({
+            "code": building['Code'].replace('B_', ''),
+            "label": building['DisplayText'],
+            "rooms": rooms
+        })
+
+    return clean_buildings
 
 
 def get_current_building_density() -> dict:
