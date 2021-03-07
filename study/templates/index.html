@@ -34,11 +34,11 @@
         {{room.label}}
       </p>
       <p class="text-base text-black-600 font-semibold tracking-wide uppercase">
-        {{room.address}}, Boulder, CO
+        <a href="http://maps.google.com/?q={{room.address}}, Boulder, CO">
+          {{room.address}}, Boulder, CO
+        </a>
       </p>
-      <p class="card-text">
-        Current building density: {{room.density_label}}
-      </p>
+      <p class="card-text">Current building density: {{room.density_label}}</p>
       <a href="https://ems.colorado.edu/" target="_blank">
         <button
           type="button"
