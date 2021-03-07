@@ -8,4 +8,8 @@ class MapView(TemplateView):
 
 class IndexView(TemplateView):
     template_name = "index.html"
-    extra_context={'room': choose_room.choose_random()}
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['room'] = choose_room.choose_from_cache()
+        return data
