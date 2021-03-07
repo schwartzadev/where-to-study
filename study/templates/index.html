@@ -1,47 +1,51 @@
 {% extends "base.html" %} {% block content %}
 
 <style>
-    .container {
-        margin: 0 auto;
-        width: 75vw;
-    }
-    .header {
-        width: fit-content;
-    }
+  .container {
+    margin: 0 auto;
+    width: 75vw;
+  }
+  .header {
+    width: fit-content;
+  }
 </style>
 
 <div class="container text-center">
-    <div class="px-4 py-5 sm:p-6">
-        <p class="uppercase text-center">Where to study?</p>
-    </div>
-    <div class="text-base max-w-prose mx-auto lg:max-w-none">
-      <div>
-          <div class="text-left mx-auto header mb-2">
-              <p class="text-base leading-6 font-semibold tracking-wider uppercase">Go study in</p>
-              <h2
-                class="text-5xl leading-none font-extrabold tracking-tight text-gray-900 sm:text-4x1"
-              >
-                {{room.label}}
-              </h2>
-          </div>
-        <div>
-          <h2 class="text-base text-black-600 font-semibold tracking-wide uppercase">
-            {{room.address}}
-          </h2>
-          </button>
-        </div>
-            <a href="https://ems.colorado.edu/">
-                <button
-                  type="button"
-                  class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 my-8"
-                >
-                  Book this room →
-              </button>
-            </a>
+  <div class="px-4 py-5 sm:p-6">
+    <p class="uppercase text-center">Where to study?</p>
+  </div>
+  <div class="text-base max-w-prose mx-auto lg:max-w-none">
+    <div>
+      <div class="text-left mx-auto header mb-4">
+        <p class="text-base color-blue-800 leading-6 font-bold tracking-wider uppercase">
+          Go study in
+        </p>
+        <h2
+          class="text-5xl leading-none font-extrabold tracking-tight text-gray-900 sm:text-4x1"
+        >
+          {{room.building_label}}
+        </h2>
       </div>
+      <p
+        class="text-2xl leading-none font-bold tracking-tight text-gray-800 mb-3"
+      >
+        {{room.label}}
+      </p>
+      <p class="text-base text-black-600 font-semibold tracking-wide uppercase">
+        {{room.address}}
+      </p>
+      <a href="https://ems.colorado.edu/" target="_blank">
+        <button
+          type="button"
+          class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 my-8"
+        >
+          Book this room →
+        </button>
+      </a>
     </div>
+  </div>
 
-    <iframe src="map" width="100%" height="400"></iframe>
+  <iframe src="map" width="100%" height="400"></iframe>
 </div>
 
 {% endblock %}

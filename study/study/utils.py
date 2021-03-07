@@ -163,6 +163,7 @@ def get_available_rooms():
                 "label": room['name'],
                 "id": room['id'],
                 "building_code": building["code"],
+                "building_label": building["label"],
                 "density": current_density
             })
 
