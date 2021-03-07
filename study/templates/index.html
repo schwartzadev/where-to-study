@@ -17,7 +17,9 @@
   <div class="text-base max-w-prose mx-auto lg:max-w-none">
     <div>
       <div class="text-left mx-auto header mb-4">
-        <p class="text-base color-blue-800 leading-6 font-bold tracking-wider uppercase">
+        <p
+          class="text-base text-blue-800 leading-6 font-bold tracking-wider uppercase"
+        >
           Go study in
         </p>
         <h2
@@ -42,10 +44,21 @@
           Book this room →
         </button>
       </a>
+      <p class="mb-4 text-grey-500">
+        <a href=".">↻ Get a different room</a>
+      </p>
     </div>
   </div>
 
   <iframe src="map" width="100%" height="400"></iframe>
+
+  <h3>About Us:</h3>
+  <p>
+    This project was developed during HackCU 007 from March 2-3 2021. It will
+    randomly select you a room to study in, only including rooms that are not
+    booked allready. The randomisation weighted towards buildings with less
+    people inside
+  </p>
 </div>
 
 {% endblock %}
