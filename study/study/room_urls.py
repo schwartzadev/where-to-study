@@ -29,7 +29,7 @@ def cache() -> dict:
         content['title'] = building.find('h2', {'class': 'feature-callout-title'}).text
 
         room_elements = building.find_all('li')
-        rooms = [{'destination': room.find('a')['href'].split('?ce/')[0], 'title': room.find('a').text} for room in room_elements]
+        rooms = [{'destination': room.find('a')['href'].split('?')[1], 'title': room.find('a').text} for room in room_elements]
         content['rooms'] = rooms
 
         code = re.search(r'\(([A-Z4]*)\)?$', content['title']).group(1)
@@ -52,6 +52,18 @@ def get() -> dict:
         return data
     else:
         return cache()
+
+
+def match_string_to_room(room_title: str, rooms: list) -> str:
+    """
+    Matches a room name with its room from get()
+
+    @return: the url for the room's map
+    """
+    for room in rooms:
+        if room['title'] in room_title:
+            # like 'C325' in 'SEEC C325 Seat 04'
+            return room['destination']
 
 if __name__ == '__main__':
     urls = get()

@@ -5,6 +5,8 @@ import requests
 import json
 import pytz
 
+from study import room_urls
+
 """
 Utilities to get available rooms
 """
@@ -171,9 +173,22 @@ def get_available_rooms():
 
     # Add address data
     building_info = get_building_info()
+    urls = room_urls.get()
+
+    rooms_with_urls = []
 
     for room in filtered_rooms:
         code = room['building_code']
-        room['address'] = building_info[code]['address']
+        try:
+            building_url_info = urls[code]
+            room['address'] = building_info[code]['address']
+            room['map_hash'] = room_urls.match_string_to_room(
+                room['label'],
+                building_url_info['rooms'],
+            )
+            rooms_with_urls.append(room)
+        except KeyError:
+            # Skip rooms that aren't in buildings with associated URLs.
+            pass
 
-    return filtered_rooms
+    return rooms_with_urls
