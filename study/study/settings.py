@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'f1mw^xt$29vio$&#5qtvrmh-8gklf+_o0%!j$!p5l6v*u8p@hx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', 'www.curooms.live']
 
