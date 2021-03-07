@@ -52,13 +52,33 @@
 
   <iframe src="map" width="100%" height="400"></iframe>
 
-  <h3>About Us:</h3>
-  <p>
-    This project was developed during HackCU 007 from March 2-3 2021. It will
-    randomly select you a room to study in, only including rooms that are not
-    booked allready. The randomisation weighted towards buildings with less
-    people inside
-  </p>
+  <footer class="bg-white">
+    <div class="relative bg-white mt-16">
+      <div class="text-base max-w-prose mx-auto lg:max-w-lg">
+        <h3
+          class="mt-2 text-2xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-3xl"
+        >
+          About
+        </h3>
+        <div class="mt-5 prose prose-indigo text-gray-500">
+          <p>
+            This project randomly selects an available room for you to study in.
+            The randomisation is weighted towards buildings with fewer people
+            inside. Developed during HackCU 007 from March 2-3,
+            2021.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <p class="prose"></p>
+    <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+      <p class="mt-8 text-center text-base text-gray-400">
+        <a href="https://aschwartz.me">Andrew Schwartz</a> and Carter Andrews
+        for <a href="https://hackcu.org/">Hack CU</a>.
+      </p>
+    </div>
+  </footer>
 </div>
 
 {% endblock %}
