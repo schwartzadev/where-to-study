@@ -3,6 +3,12 @@ from django.urls import path
 
 from study import views
 
+from study import cache_rooms
+
+# Runs once on startup
+cache_rooms.cache()
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('map', views.MapView.as_view(), name='map'),
