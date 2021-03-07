@@ -28,33 +28,16 @@
           {{room.building_label}}
         </h2>
       </div>
-
-      <div class="container-fluid" id="infoholder">
-        <div class="row">
-          <div class="col-md">
-            <div class="card" id="stat">
-              <div class="card-body">
-                <h2 class="card-text">Population Desity: 20%</h2>
-              </div>
-            </div>
-          </div>
-          <div class="col-md">
-            <div class="card" id="stat">
-              <div class="card-body">
-                <h2 class="card-text">Adress: 122 W 1233 St, Boulder</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <p
         class="text-2xl leading-none font-bold tracking-tight text-gray-800 mb-3"
       >
         {{room.label}}
       </p>
       <p class="text-base text-black-600 font-semibold tracking-wide uppercase">
-        {{room.address}}
+        {{room.address}}, Boulder, CO
+      </p>
+      <p class="card-text">
+        Current building density: {{room.density_label}}
       </p>
       <a href="https://ems.colorado.edu/" target="_blank">
         <button

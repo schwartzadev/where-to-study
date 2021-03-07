@@ -125,6 +125,11 @@ def filter_rooms_by_bookings(original_rooms: list) -> list:
 
     return available_rooms
 
+def density_to_string(density: float) -> str:
+    if density < 0.01:
+        return '<1%'
+    return format(density, ".2%")
+
 
 def get_available_rooms():
     """
@@ -166,7 +171,8 @@ def get_available_rooms():
                 "id": room['id'],
                 "building_code": building["code"],
                 "building_label": building["label"],
-                "density": current_density
+                "density": current_density,
+                "density_label": density_to_string(current_density)
             })
 
     filtered_rooms = filter_rooms_by_bookings(rooms)
