@@ -9,6 +9,6 @@ def choose_random() -> dict:
     
     weights = [( 1 - room['density']) for room in rooms]
 
-    room = random.choices(rooms, weights=weights)
+    room = random.choices(rooms, weights=weights)[0]
 
     return room
