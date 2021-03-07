@@ -1,4 +1,40 @@
 {% extends "base.html" %} {% block content %}
 
+<div class="bg-white overflow-hidden shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6"><center>WHERE TO STUDY</center>
+      </div>
+    </div>
+    <div class="text-base max-w-prose mx-auto lg:max-w-none">
+      <div class="col">
+        <center>
+        <p
+          class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4x1"
+        >
+          {{room.label}}
+        </p>
+        <div class="col-2">
+          <h2 class="text-base text-black-600 font-semibold tracking-wide uppercase">
+            {{room.address}}
+          </h2>
+          </button>
+        </div>
+        <div class="col-2">
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Make a booking
+        </center>
+      </div>
+      <ul>
+          <li>{{room.building_code}}</li>
+          <li>{{room.density}}</li>
+      </ul>
+    </div>
+
+
 <iframe src="map" />
+
+<h2>Room</h2>
+
 {% endblock %}
