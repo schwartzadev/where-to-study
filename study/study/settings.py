@@ -117,6 +117,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+SECURE_SSL_REDIRECT = True # Force SSL
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
